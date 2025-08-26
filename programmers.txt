@@ -64,7 +64,7 @@ bmp_boot.program.cmd.windows={runtime.tools.arm-none-eabi-gcc.path}/bin/arm-none
 bmp_boot.program.cmd.macosx={runtime.tools.arm-none-eabi-gcc.path}/bin/arm-none-eabi-gdb
 
 # Burn bootloader pattern
-bmp_boot.program.burn_pattern.windows={program.cmd}  "{bootloader.file}.hex" -quiet --batch -ex "target extended-remote \\.\{serial.port}" -ex "mon tpwr enable" -ex "mon swdp_scan" -ex "att 1"  ex "echo \nFlashing\n" -ex "load  " -ex "echo \nVerifying\n" -ex "compare-sections" -ex "mon hard_srst" -ex "detach" -ex "echo \nBootloader upload complete!\n" -ex "quit"
+bmp_boot.program.burn_pattern.windows={program.cmd}  "{bootloader.file}.hex" -quiet --batch -ex "target extended-remote \\.\{serial.port}" -ex "mon tpwr enable" -ex "mon swdp_scan" -ex "att 1"  -ex "echo \nFlashing\n" -ex "load  " -ex "echo \nVerifying\n" -ex "compare-sections" -ex "mon hard_srst" -ex "detach" -ex "echo \nBootloader upload complete!\n" -ex "quit"
 bmp_boot.program.burn_pattern.macosx={program.cmd}  "{bootloader.file}.hex" -quiet --batch -ex "target extended-remote {serial.port}" -ex "mon tpwr enable" -ex "mon swdp_scan" -ex "att 1" -ex "echo \nFlashing\n" -ex "load  " -ex "echo \nVerifying\n" -ex "compare-sections" -ex "mon hard_srst" -ex "detach" -ex "echo \nBootloader upload complete!\n" -ex "quit"
 
 
@@ -72,6 +72,25 @@ bmp_boot.program.burn_pattern.macosx={program.cmd}  "{bootloader.file}.hex" -qui
 bmp_boot.program.params.quiet=
 bmp_boot.program.params.verbose=
 bmp_boot.program.pattern=echo Please select <Black Magic Probe for Bluefruit nRF52> as programmer
+
+
+#**********************************************
+# Black Magic Probe — full flash (MBR + SoftDevice + Bootloader) via file+load
+#**********************************************
+bmp_boot_full.name=Black Magic Probe for nRF52 (MBR+SD+Bootloader)
+bmp_boot_full.program.tool=bootburn
+bmp_boot_full.program.cmd=arm-none-eabi-gdb
+bmp_boot_full.program.cmd.windows={runtime.tools.arm-none-eabi-gcc.path}/bin/arm-none-eabi-gdb.exe
+bmp_boot_full.program.cmd.macosx={runtime.tools.arm-none-eabi-gcc.path}/bin/arm-none-eabi-gdb
+
+bmp_boot_full.program.burn_pattern.windows={program.cmd} -quiet --batch -ex "set confirm off" -ex "target extended-remote \\.\{serial.port}" -ex "mon tpwr enable" -ex "mon swdp_scan" -ex "att 1" -ex "mon erase_mass" -ex "file D:/Documents/Arduino/hardware/Community_nRF52/nrf52/bootloader/mbr/mbr_nrf52_2.4.1_mbr.hex" -ex "load" -ex "file D:/Documents/Arduino/hardware/Community_nRF52/nrf52/bootloader/softdevice/s140_nrf52_6.1.1_softdevice.hex" -ex "load" -ex "file D:/Documents/Arduino/hardware/Community_nRF52/nrf52/bootloader/holyiot_18010/holyiot_18010_bootloader-0.4.1_s140_6.1.1.hex" -ex "load" -ex "mon reset" -ex "detach" -ex "quit"
+
+bmp_boot_full.program.burn_pattern.macosx={program.cmd} -quiet --batch -ex "set confirm off" -ex "target extended-remote {serial.port}" -ex "mon tpwr enable" -ex "mon swdp_scan" -ex "att 1" -ex "mon erase_mass" -ex "file \"{runtime.platform.path}/bootloader/mbr/mbr_nrf52_2.4.1_mbr.hex\"" -ex "load" -ex "file \"{runtime.platform.path}/bootloader/softdevice/s140_nrf52_6.1.1_softdevice.hex\"" -ex "load" -ex "file \"{bootloader.file}.hex\"" -ex "load" -ex "mon reset" -ex "detach" -ex "quit"
+
+
+bmp_boot_full.program.params.quiet=
+bmp_boot_full.program.params.verbose=
+bmp_boot_full.program.pattern=echo Please select <Black Magic Probe for nRF52 (MBR+SD+Bootloader)> as programmer
 
 
 #**********************************************

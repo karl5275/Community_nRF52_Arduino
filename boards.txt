@@ -336,6 +336,61 @@ bluemacro_nrf52840.menu.debug.l3.build.debug_flags=-DCFG_DEBUG=3
 bluemacro_nrf52840.menu.debug.l3.build.sysview_flags=-DCFG_SYSVIEW=1
 
 
+# ----------------------------------
+# Holyiot YJ-18010 (nRF52840)
+# ----------------------------------
+
+holyiot_18010.name=Holyiot 18010 (nRF52840)
+
+# VID/PID for bootloader with/without UF2, Arduino (runtime)
+holyiot_18010.vid.0=0x1D50
+holyiot_18010.pid.0=0x6160
+holyiot_18010.vid.1=0x1D50
+holyiot_18010.pid.1=0x6161
+
+# Bootloader
+holyiot_18010.bootloader.file=bootloader/holyiot_18010/holyiot_18010_bootloader
+
+# Upload
+holyiot_18010.bootloader.tool=bootburn
+holyiot_18010.upload.tool=nrfutil
+holyiot_18010.upload.protocol=nrfutil
+holyiot_18010.upload.use_1200bps_touch=true
+holyiot_18010.upload.wait_for_upload_port=true
+holyiot_18010.upload.maximum_size=815104
+holyiot_18010.upload.maximum_data_size=237568
+
+# Build
+holyiot_18010.build.mcu=cortex-m4
+holyiot_18010.build.f_cpu=64000000
+holyiot_18010.build.board=HOLYIOT_18010
+holyiot_18010.build.core=nRF5
+holyiot_18010.build.variant=holyiot_18010
+holyiot_18010.build.usb_manufacturer="Filco_Mod"
+holyiot_18010.build.usb_product="FilcoMJ2Conv Mod"
+holyiot_18010.build.extra_flags=-DNRF52840_XXAA {build.flags.usb}
+holyiot_18010.build.ldscript=nrf52840_s140_v6.ld
+holyiot_18010.build.vid=0x1D50
+holyiot_18010.build.pid=0x6161
+
+# SoftDevice Menu
+holyiot_18010.menu.softdevice.s140v6=0.4.1 SoftDevice s140 6.1.1
+holyiot_18010.menu.softdevice.s140v6.build.sd_name=s140
+holyiot_18010.menu.softdevice.s140v6.build.bl_version=0.4.1
+holyiot_18010.menu.softdevice.s140v6.build.sd_version=6.1.1
+holyiot_18010.menu.softdevice.s140v6.build.sd_fwid=0x00B6
+
+# Debug Menu
+holyiot_18010.menu.debug.l0=Level 0 (Release)
+holyiot_18010.menu.debug.l0.build.debug_flags=-DCFG_DEBUG=0
+holyiot_18010.menu.debug.l1=Level 1 (Error Message)
+holyiot_18010.menu.debug.l1.build.debug_flags=-DCFG_DEBUG=1
+holyiot_18010.menu.debug.l2=Level 2 (Full Debug)
+holyiot_18010.menu.debug.l2.build.debug_flags=-DCFG_DEBUG=2
+holyiot_18010.menu.debug.l3=Level 3 (Segger SystemView)
+holyiot_18010.menu.debug.l3.build.debug_flags=-DCFG_DEBUG=3
+holyiot_18010.menu.debug.l3.build.sysview_flags=-DCFG_SYSVIEW=1
+
 # -------------------------------------------------------
 # 
 # JORIC BOARDS
